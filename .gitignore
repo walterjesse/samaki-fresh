@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Environment
+venv/
+env/
+.env
+
+# Databases
+*.sqlite3
+db.sqlite3
+
+# Django
+staticfiles/
+media/
+media/*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+
+# Node
+node_modules/
+
+# Coverage
+htmlcov/
+.coverage
+.env
+venv
+__pycache__

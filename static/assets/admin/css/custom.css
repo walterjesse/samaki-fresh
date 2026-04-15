@@ -1,0 +1,188 @@
+/* Optional: import your frontend stylesheet if it is safe for admin layouts */
+/* @import url("../../css/styles.css"); */
+
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --fc-primary: #5b1cee;
+    --fc-primary-hover: #4a14d0;
+    --fc-bg: #0b1020;
+    --fc-surface: #111827;
+    --fc-surface-2: #0f172a;
+    --fc-border: rgba(255, 255, 255, 0.08);
+    --fc-text: #e5e7eb;
+    --fc-muted: #94a3b8;
+}
+
+html,
+body,
+.wrapper,
+.content-wrapper,
+.main-header,
+.main-sidebar,
+.card,
+.modal-content,
+.dropdown-menu,
+.form-control,
+.btn,
+.table,
+.sidebar,
+.nav-link {
+    font-family: "Jost", sans-serif !important;
+}
+
+html,
+body,
+.content-wrapper {
+    background: var(--fc-surface-2) !important;
+    color: var(--fc-text) !important;
+}
+
+.main-header.navbar {
+    background: linear-gradient(90deg, #0f172a, #111827) !important;
+    border-bottom: 1px solid var(--fc-border) !important;
+}
+
+.brand-link {
+    background: rgba(91, 28, 238, 0.12) !important;
+    color: #fff !important;
+    border-bottom: 1px solid var(--fc-border) !important;
+}
+
+.brand-link .brand-text {
+    font-weight: 700 !important;
+    letter-spacing: 0.3px;
+}
+
+.main-sidebar {
+    background: var(--fc-bg) !important;
+}
+
+.nav-sidebar .nav-link {
+    color: rgba(229, 231, 235, 0.85) !important;
+    border-radius: 12px;
+    margin: 0.2rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link.active,
+.nav-sidebar .menu-open > .nav-link {
+    background: var(--fc-primary) !important;
+    color: #fff !important;
+}
+
+.nav-sidebar .nav-icon {
+    color: inherit !important;
+}
+
+.btn-primary,
+.bg-primary,
+.badge-primary,
+.page-item.active .page-link {
+    background-color: var(--fc-primary) !important;
+    border-color: var(--fc-primary) !important;
+}
+
+.btn-primary:hover,
+.page-item.active .page-link:hover {
+    background-color: var(--fc-primary-hover) !important;
+    border-color: var(--fc-primary-hover) !important;
+}
+
+.btn-outline-primary {
+    color: var(--fc-primary) !important;
+    border-color: var(--fc-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--fc-primary) !important;
+    color: #fff !important;
+}
+
+.card,
+.modal-content {
+    background: var(--fc-surface) !important;
+    color: var(--fc-text) !important;
+    border: 1px solid var(--fc-border) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35) !important;
+}
+
+.card-header {
+    background: transparent !important;
+    border-bottom: 1px solid var(--fc-border) !important;
+}
+
+.content-header h1,
+.h1,
+h1,
+h2,
+h3 {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: #8b5cf6;
+}
+
+a:hover {
+    color: #a78bfa;
+}
+
+.form-control,
+.select2-selection,
+textarea,
+input,
+.ck-editor__editable {
+    background-color: #0f172a !important;
+    color: var(--fc-text) !important;
+    border-color: var(--fc-border) !important;
+}
+
+.form-control:focus,
+textarea:focus,
+input:focus {
+    border-color: var(--fc-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(91, 28, 238, 0.18) !important;
+}
+
+.table {
+    color: var(--fc-text) !important;
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: #f8fafc !important;
+    border-bottom-color: var(--fc-border) !important;
+}
+
+.table td,
+.table th {
+    border-color: var(--fc-border) !important;
+}
+
+.breadcrumb {
+    background: transparent !important;
+}
+
+.breadcrumb-item a {
+    color: #a78bfa !important;
+}
+
+.alert {
+    border-radius: 14px !important;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--fc-primary) !important;
+    color: #fff !important;
+}
+
+select,
+.custom-select {
+    background-color: #0f172a !important;
+    color: var(--fc-text) !important;
+    border-color: var(--fc-border) !important;
+}

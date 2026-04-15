@@ -1,0 +1,54 @@
+{% extends 'partials/base.html' %} {% load static %}
+
+{% block content %}
+<section>
+    <div class="mb-4">
+        <div>
+            <h1 class="font-display text-[26px] text-slate-900">Fish Catalog</h1>
+            <p class="text-sm text-slate-600">Choose omena, tilapia, mbuta and more — all fresh.</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {% for product in products %}
+        <article class="group overflow-hidden rounded-[22px] border border-slate-200 bg-white">
+            <div class="relative">
+                <a href="{% url 'store:product_detail' product.slug %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" class="h-40 w-full object-cover transition group-hover:scale-[1.02]">
+                </a>
+                <div class="absolute left-2 top-2 flex items-center gap-1.5 rounded-full bg-white/90 px-2 py-1 text-[11px] font-medium text-slate-700 shadow">
+                    <span class="h-1.5 w-1.5 rounded-full {% if product.stock > 20 %}bg-emerald-500{% elif product.stock > 5 %}bg-amber-500{% else %}bg-rose-500{% endif %}"></span>
+                    {{ product.stock }}kg available
+                </div>
+                <a href="{% url 'store:add_to_wishlist' %}?product_id={{ product.id }}" class="absolute top-2 right-2 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-slate-400 shadow ring-1 ring-black/5 transition hover:bg-white hover:text-rose-500">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 21s-6.5-4.1-9-8.1C.5 9 3 5 7 5c2 0 3.5 1 5 2.5C13.5 6 15 5 17 5c4 0 6.5 4 4 7.9-2.5 4-9 8.1-9 8.1Z"/></svg>
+                </a>
+            </div>
+            <div class="p-3.5">
+                <div class="flex items-start justify-between gap-2">
+                    <div>
+                        <div class="line-clamp-1 text-[14px] font-semibold">{{ product.name }}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[15px] font-semibold">KSh {{ product.price|floatformat:0 }}</div>
+                        <div class="text-[11px] text-slate-500">/ kg</div>
+                    </div>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                    <a href="{% url 'store:product_detail' product.slug %}" class="text-[12px] font-medium text-slate-600 underline-offset-2 hover:underline">View</a>
+                    <form method="POST" action="{% url 'store:add_to_cart' %}" class="inline-flex">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="qty" value="1">
+                        <button type="submit" class="inline-flex h-8 items-center gap-1.5 rounded-lg bg-teal-600 px-2.5 text-[12px] font-semibold text-white hover:bg-teal-700">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9H7.5L6 6Z"/></svg>
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

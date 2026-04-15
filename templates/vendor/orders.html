@@ -1,0 +1,87 @@
+{% extends 'partials/base.html' %} {% load static %}
+
+{% block content %}
+<section>
+    <div class="mb-4 flex items-center justify-between">
+        <div>
+            <h1 class="font-display text-[26px] text-slate-900">Orders</h1>
+            <p class="text-sm text-slate-600">Manage payments, packing and delivery.</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <form method="GET" action="{% url 'vendor:orders' %}" class="flex items-center gap-2">
+                <input type="text" name="q" placeholder="Search by number / name" class="h-10 w-[220px] rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none focus:border-teal-500">
+            </form>
+        </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[24px] border border-slate-200 bg-white">
+        <div class="grid grid-cols-12 border-b border-slate-100 bg-slate-50/60 px-4 py-2.5 text-[12px] font-medium uppercase tracking-wider text-slate-500">
+            <div class="col-span-3">Order</div>
+            <div class="col-span-3">Mteja</div>
+            <div class="col-span-2">Vitu</div>
+            <div class="col-span-2">Total</div>
+            <div class="col-span-2 text-right">Status</div>
+        </div>
+        <div class="divide-y divide-slate-100">
+            {% for order in orders %}
+            <details class="group">
+                <summary class="grid cursor-pointer list-none grid-cols-12 items-center px-4 py-3 hover:bg-slate-50">
+                    <div class="col-span-3">
+                        <div class="text-[14px] font-medium text-slate-900">#{{ order.order_id }}</div>
+                        <div class="text-[12px] text-slate-500">{{ order.created_at|date:"M d, H:i" }}</div>
+                    </div>
+                    <div class="col-span-3">
+                        <div class="text-[14px] text-slate-900">{{ order.user.profile.full_name }}</div>
+                        <div class="text-[12px] text-slate-500">{{ order.user.profile.mobile }}</div>
+                    </div>
+                    <div class="col-span-2 text-[13px] text-slate-700">{{ order.order_items.count }} items</div>
+                    <div class="col-span-2 text-[14px] font-semibold text-slate-900">KSh {{ order.total|floatformat:0 }}</div>
+                    <div class="col-span-2 text-right">
+                        <span class="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium ring-1
+                            {% if order.order_status == 'Pending' %}bg-amber-50 text-amber-700 ring-amber-200
+                            {% elif order.order_status == 'Processing' %}bg-sky-50 text-sky-700 ring-sky-200
+                            {% elif order.order_status == 'Shipped' %}bg-indigo-50 text-indigo-700 ring-indigo-200
+                            {% elif order.order_status == 'Delivered' %}bg-emerald-50 text-emerald-700 ring-emerald-200
+                            {% else %}bg-slate-50 text-slate-700 ring-slate-200{% endif %}">
+                            {{ order.order_status }}
+                        </span>
+                    </div>
+                </summary>
+                <div class="grid grid-cols-1 gap-4 border-t border-slate-100 bg-slate-50/40 px-4 py-4 md:grid-cols-3">
+                    <div class="rounded-2xl bg-white p-3 ring-1 ring-slate-200">
+                        <div class="text-[12px] font-medium uppercase tracking-wider text-slate-500">Vitu</div>
+                        <ul class="mt-2 space-y-1.5 text-[13px]">
+                            {% for item in order.order_items.all %}
+                            <li class="flex items-center justify-between">
+                                <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                                <span class="font-medium">KSh {{ item.total|floatformat:0 }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl bg-white p-3 ring-1 ring-slate-200">
+                        <div class="text-[12px] font-medium uppercase tracking-wider text-slate-500">Update Status</div>
+                        <form method="POST" action="{% url 'vendor:update_order_status' order.order_id %}" class="mt-2 flex flex-wrap gap-1.5">
+                            {% csrf_token %}
+                            <button type="submit" name="status" value="Pending" class="rounded-full border px-2.5 py-1 text-[12px] {% if order.order_status == 'Pending' %}border-teal-600 bg-teal-50 text-teal-700{% else %}border-slate-200 bg-white hover:bg-slate-50{% endif %}">Pending</button>
+                            <button type="submit" name="status" value="Processing" class="rounded-full border px-2.5 py-1 text-[12px] {% if order.order_status == 'Processing' %}border-teal-600 bg-teal-50 text-teal-700{% else %}border-slate-200 bg-white hover:bg-slate-50{% endif %}">Processing</button>
+                            <button type="submit" name="status" value="Shipped" class="rounded-full border px-2.5 py-1 text-[12px] {% if order.order_status == 'Shipped' %}border-teal-600 bg-teal-50 text-teal-700{% else %}border-slate-200 bg-white hover:bg-slate-50{% endif %}">Shipped</button>
+                            <button type="submit" name="status" value="Delivered" class="rounded-full border px-2.5 py-1 text-[12px] {% if order.order_status == 'Delivered' %}border-teal-600 bg-teal-50 text-teal-700{% else %}border-slate-200 bg-white hover:bg-slate-50{% endif %}">Delivered</button>
+                        </form>
+                        <p class="mt-2 text-[12px] text-slate-500">Saving will send notification to customer.</p>
+                    </div>
+                    <div class="rounded-2xl bg-white p-3 ring-1 ring-slate-200">
+                        <div class="text-[12px] font-medium uppercase tracking-wider text-slate-500">Message to Customer</div>
+                        <textarea placeholder="Hello, your order is on the way..." class="mt-2 h-20 w-full rounded-xl border border-slate-200 p-2 text-sm outline-none focus:border-teal-500"></textarea>
+                        <div class="mt-2 flex gap-2">
+                            <button class="h-9 rounded-lg bg-slate-900 px-3 text-xs font-medium text-white">Send SMS</button>
+                            <a href="tel:{{ order.user.profile.mobile }}" class="h-9 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium">Call</a>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

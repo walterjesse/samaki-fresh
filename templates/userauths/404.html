@@ -1,0 +1,11 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="min-h-[60vh] flex flex-col items-center justify-center text-center py-12 px-4">
+    <div class="max-w-md">
+        <div class="grid w-24 h-24 place-items-center mx-auto rounded-2xl bg-slate-100 mb-6">
+            <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75

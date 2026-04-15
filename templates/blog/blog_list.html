@@ -1,0 +1,88 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Blog - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <!-- Hero -->
+    <section class="text-center mb-12">
+        <h1 class="font-display text-[44px] sm:text-[56px] leading-[1.1] bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">Our Blog</h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">Stories, tips, and recipes from our FastCart community</p>
+    </section>
+
+    <!-- Blog Grid -->
+    <section>
+        {% if blogs.object_list %}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {% for blog in blogs.object_list %}
+                    <a href="{% url 'blog:blog_detail' blog.slug %}" class="group rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg hover:border-teal-200 transition-all duration-300">
+                        <!-- Image -->
+                        {% if blog.image %}
+                            <div class="relative overflow-hidden bg-slate-100 h-48">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                            </div>
+                        {% else %}
+                            <div class="relative overflow-hidden bg-gradient-to-br from-teal-50 to-teal-100 h-48 flex items-center justify-center">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-teal-600"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+                            </div>
+                        {% endif %}
+
+                        <!-- Content -->
+                        <div class="p-6">
+                            <!-- Category -->
+                            {% if blog.category %}
+                                <span class="inline-block text-xs font-semibold text-teal-600 bg-teal-50 rounded-full px-3 py-1 mb-3">{{ blog.category }}</span>
+                            {% endif %}
+
+                            <!-- Title -->
+                            <h3 class="font-display text-lg text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">{{ blog.title }}</h3>
+
+                            <!-- Excerpt -->
+                            <p class="text-sm text-slate-600 mb-4 line-clamp-2">{{ blog.description }}</p>
+
+                            <!-- Meta -->
+                            <div class="flex items-center gap-4 pt-4 border-t border-slate-100 text-xs text-slate-500">
+                                <span>{{ blog.author.username }}</span>
+                                <span>{{ blog.date|date:"M d, Y" }}</span>
+                                <span>❤️ {{ blog.total_likes }}</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if blogs.has_other_pages %}
+                <div class="flex items-center justify-center gap-2 mb-12">
+                    {% if blogs.has_previous %}
+                        <a href="?page=1" class="px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50">First</a>
+                        <a href="?page={{ blogs.previous_page_number }}" class="px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50">Previous</a>
+                    {% endif %}
+
+                    <span class="px-4 py-2 text-slate-600">Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+
+                    {% if blogs.has_next %}
+                        <a href="?page={{ blogs.next_page_number }}" class="px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50">Next</a>
+                        <a href="?page={{ blogs.paginator.num_pages }}" class="px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50">Last</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="text-center py-12">
+                <p class="text-slate-600 mb-4">No blog posts yet. Check back soon!</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- CTA -->
+    <section class="rounded-2xl border border-slate-200 bg-gradient-to-r from-teal-50 to-cyan-50 p-8 text-center">
+        <h2 class="font-display text-[26px] text-slate-900 mb-2">Want to Share Your Story?</h2>
+        <p class="text-slate-600 mb-6">We'd love to feature your fish recipes and stories on FastCart</p>
+        <a href="{% url 'store:contact' %}" class="inline-flex h-11 items-center gap-2 rounded-xl bg-teal-600 px-6 text-sm font-semibold text-white hover:bg-teal-700">
+            Get in Touch
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Shop Vendors - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Hero -->
+    <section class="text-center">
+        <h1 class="font-display text-[38px] sm:text-[48px] text-slate-900 mb-4">Shop Vendors</h1>
+        <p class="max-w-2xl mx-auto text-xl text-slate-600 mb-8">Discover trusted fishermen and shop owners supplying fresh catch from Lake Victoria</p>
+    </section>
+
+    <!-- Vendors Grid -->
+    {% if vendors %}
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for vendor in vendors %}
+        <article class="group relative overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 p-6">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="relative">
+                    {% if vendor.profile_picture %}
+                    <img src="{{ vendor.profile_picture.url }}" alt="{{ vendor.shop_name }}" class="w-20 h-20 rounded-2xl object-cover ring-2 ring-slate-200">
+                    {% else %}
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 grid place-items-center text-white font-semibold text-lg ring-2 ring-slate-200">
+                        {{ vendor.shop_name.0|upper }}
+                    </div>
+                    {% endif %}
+                    <span class="absolute -top-1 -right-1 grid h-6 w-6 place-items-center rounded-full bg-emerald-500 text-xs font-bold text-white ring-1 ring-white">
+                        {% with vendor.user.store_products.all|length as product_count %}{{ product_count }}{% endwith %}
+                    </span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-xl font-semibold text-slate-900 line-clamp-1 mb-1 group-hover:text-teal-700">{{ vendor.shop_name }}</h3>
+                    <p class="text-slate-600 text-sm mb-2">{{ vendor.location|default:"Lake Victoria Region" }}</p>
+                    <div class="flex items-center gap-2 text-sm text-amber-500 mb-3">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6

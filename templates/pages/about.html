@@ -1,0 +1,63 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}About Us - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-12">
+    <!-- Hero -->
+    <section class="text-center">
+        <h1 class="font-display text-[44px] sm:text-[56px] leading-[1.1] bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">About FastCart</h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">Fresh fish from Lake Victoria, delivered to your doorstep with care.</p>
+    </section>
+
+    <!-- Story -->
+    <section>
+        <h2 class="font-display text-[26px] text-slate-900 mb-4">Our Story</h2>
+        <p class="text-slate-600 leading-relaxed">
+            FastCart started with a simple mission: to bring the freshest fish from Lake Victoria directly to homes across Kenya. Founded by Mama Akinyi, we've grown from a small family operation to a trusted marketplace connecting local fishermen with families who deserve quality, sustainably-sourced fish.
+        </p>
+        <p class="text-slate-600 leading-relaxed mt-4">
+            Every fish we sell is cleaned, dried, and packaged with the same care Mama Akinyi uses for her own family. We believe in fair prices for fishermen and fresh, affordable fish for everyone.
+        </p>
+    </section>
+
+    <!-- Values -->
+    <section>
+        <h2 class="font-display text-[26px] text-slate-900 mb-4">Our Values</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="rounded-2xl border border-slate-200 bg-white p-6">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-teal-700 mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">Quality First</h3>
+                <p class="text-sm text-slate-600">Every fish is inspected and handled with care to ensure freshness.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-teal-700 mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">Community</h3>
+                <p class="text-sm text-slate-600">Supporting local fishermen and their families across the region.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-teal-700 mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">Trust</h3>
+                <p class="text-sm text-slate-600">Transparent pricing and reliable delivery, every time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center">
+        <h2 class="font-display text-[26px] text-slate-900 mb-2">Get in Touch</h2>
+        <p class="text-slate-600 mb-6">Have questions? We'd love to hear from you.</p>
+        <a href="{% url 'store:contact' %}" class="inline-flex h-11 items-center gap-2 rounded-xl bg-teal-600 px-6 text-sm font-semibold text-white hover:bg-teal-700">
+            Contact Us
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+</div>
+{% endblock %}

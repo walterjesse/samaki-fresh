@@ -1,0 +1,103 @@
+{% extends 'partials/base.html' %} {% load static %}
+
+{% block content %}
+<section>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_.95fr]">
+        <div class="rounded-[28px] border border-slate-200 bg-white p-5 sm:p-6">
+            <div class="flex items-center justify-between">
+                <h1 class="font-display text-[24px] text-slate-900">Checkout</h1>
+                <span class="text-sm text-slate-600">Your Cart</span>
+            </div>
+
+            <div class="mt-4 divide-y divide-slate-100">
+                {% for item in cart_items %}
+                <div class="flex items-center gap-3 py-3">
+                    <img src="{{ item.product.image.url }}" alt="" class="h-16 w-20 rounded-xl object-cover ring-1 ring-slate-200">
+                    <div class="min-w-0 flex-1">
+                        <div class="truncate text-[14px] font-medium text-slate-900">{{ item.product.name }}</div>
+                        <div class="text-[12px] text-slate-500">{{ item.product.category.title }}</div>
+                        <div class="mt-1 text-[13px] font-medium text-slate-800">KSh {{ item.product.price|floatformat:0 }}/kg × {{ item.qty }}</div>
+                    </div>
+                    <div class="w-[90px] text-right text-[14px] font-semibold text-slate-900">KSh {{ item.total|floatformat:0 }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-[15px] font-semibold text-slate-900">Shipping Address</h3>
+                <form method="POST" action="{% url 'store:checkout' %}" class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {% csrf_token %}
+                    <input type="text" name="full_name" value="{{ user.profile.full_name }}" placeholder="Full Name" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500">
+                    <input type="tel" name="mobile" value="{{ user.profile.mobile }}" placeholder="Phone Number (07XX...)" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500">
+                    <input type="email" name="email" value="{{ user.email }}" placeholder="Email" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500 sm:col-span-2">
+                    <input type="text" name="address" placeholder="Street / Area" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500 sm:col-span-2">
+                    <input type="text" name="city" placeholder="City" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500">
+                    <input type="text" name="postal_code" placeholder="Postal Code" class="h-11 rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-teal-500">
+                </form>
+            </div>
+        </div>
+
+        <div class="h-fit rounded-[28px] border border-slate-200 bg-white p-5 sm:p-6">
+            <h2 class="text-[16px] font-semibold text-slate-900">Payment Summary</h2>
+            <div class="mt-4 space-y-2 text-sm">
+                <div class="flex items-baseline justify-between">
+                    <div class="text-slate-600">Subtotal</div>
+                    <div class="font-medium text-slate-900">KSh {{ cart_total|floatformat:0 }}</div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="text-slate-600">Shipping<span class="text-[11px] text-slate-400"> • Within city</span></div>
+                    <div class="font-medium text-slate-900">KSh 150</div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <div class="text-slate-600">Discount</div>
+                    <div class="font-medium text-slate-900">- KSh {{ discount|default:0|floatformat:0 }}</div>
+                </div>
+                <div class="my-2 h-px bg-slate-100"></div>
+                <div class="flex items-baseline justify-between">
+                    <div class="text-slate-600">Total</div>
+                    <div class="text-[18px] font-medium text-slate-900">KSh {{ final_total|floatformat:0 }}</div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <div class="text-[12px] font-medium uppercase tracking-wider text-slate-500">Payment Method</div>
+                <div class="mt-2">
+                    <label class="flex cursor-pointer items-center justify-between rounded-xl border border-slate-200 p-3 hover:bg-slate-50">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="payment_method" value="mpesa" class="h-4 w-4 accent-teal-600" checked>
+                            <div>
+                                <div class="text-[14px] font-medium text-slate-900">M-Pesa</div>
+                                <div class="text-[12px] text-slate-500">Pay by phone • Instant</div>
+                            </div>
+                        </div>
+                        <span class="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-100">Popular</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- M-Pesa specific input -->
+            <div class="mt-4">
+                <label class="text-[12px] font-medium text-slate-600">M-Pesa Number</label>
+                <input type="tel" name="mpesa_number" placeholder="07XX XXX XXX" value="{{ user.profile.mobile }}" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-500">
+            </div>
+
+            <form method="POST" action="{% url 'store:checkout' %}" id="checkout-form">
+                {% csrf_token %}
+                <input type="hidden" name="payment_method" value="mpesa">
+                <input type="hidden" name="mpesa_number" id="mpesa-number-input" value="{{ user.profile.mobile }}">
+                <button type="submit" class="mt-5 h-12 w-full rounded-xl bg-teal-600 text-[15px] font-semibold text-white shadow-sm shadow-teal-600/20 transition hover:bg-teal-700">
+                    Pay KSh {{ final_total|floatformat:0 }} • Complete Order
+                </button>
+            </form>
+            <p class="mt-2 text-center text-[12px] text-slate-500">Secure payment via M-Pesa. You'll receive a confirmation SMS.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+// Update M-Pesa number input
+document.querySelector('input[name="mpesa_number"]').addEventListener('input', function() {
+    document.getElementById('mpesa-number-input').value = this.value;
+});
+</script>
+{% endblock %}

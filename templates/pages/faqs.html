@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}FAQs - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto space-y-8">
+    <div class="text-center">
+        <h1 class="font-display text-[44px] sm:text-[56px] leading-[1.1] bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">Frequently Asked Questions</h1>
+        <p class="text-xl text-slate-600">Everything you need to know about ordering from FastCart.</p>
+    </div>
+
+    <div class="space-y-4">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">How fresh is your fish?</h3>
+            <p class="text-slate-600">Our fish is sourced daily from Lake Victoria and processed within hours of catch. We clean, dry, and package each order to ensure maximum freshness.</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">What areas do you deliver to?</h3>
+            <p class="text-slate-600">We deliver to Kisumu, Homa Bay, Nairobi, and surrounding areas. Same-day delivery is available within the city limits.</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">How do I pay?</h3>
+            <p class="text-slate-600">We accept M-Pesa and Cash on Delivery for your convenience. Simply select your preferred payment method at checkout.</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">Can I track my order?</h3>
+            <p class="text-slate-600">Yes! Once your order is confirmed, you'll receive tracking information via SMS or email so you can monitor your delivery in real-time.</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">What if I'm not satisfied with my order?</h3>
+            <p class="text-slate-600">Customer satisfaction is our priority. If you're not happy with your order, please contact us within 24 hours and we'll make it right.</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">How do I become a seller on FastCart?</h3>
+            <p class="text-slate-600">We're always looking to partner with quality fishermen and vendors. Contact us through our seller registration page to learn more about joining our marketplace.</p>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <p class="text-slate-600 mb-4">Still have questions?</p>
+        <a href="{% url 'store:contact' %}" class="inline-flex h-11 items-center gap-2 rounded-xl bg-teal-600 px-6 text-sm font-semibold text-white hover:bg-teal-700">
+            Contact Us
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</div>
+{% endblock %}

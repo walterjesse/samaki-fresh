@@ -1,0 +1,204 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Fish Recipes - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <!-- Hero -->
+    <section class="text-center mb-12">
+        <h1 class="font-display text-[44px] sm:text-[56px] leading-[1.1] bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">Fish Recipes</h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">Delicious, easy-to-follow recipes featuring fresh Lake Victoria fish</p>
+    </section>
+
+    <!-- Recipe Grid -->
+    <section class="mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Recipe 1 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-teal-600"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6h6"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-teal-600 bg-teal-50 rounded-full px-3 py-1">30 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Grilled Lake Fish with Lemon & Garlic</h3>
+                    <p class="text-sm text-slate-600 mb-4">Perfectly grilled fresh fish with a zesty lemon and garlic butter sauce. A simple yet elegant dish that brings out the natural flavors of Lake Victoria tilapia.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded">Easy</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 2</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-teal-200 text-teal-600 hover:bg-teal-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+
+            <!-- Recipe 2 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-orange-50 to-amber-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-amber-600"><path d="M3 10h18M7 15h10m-8 4h6M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-amber-600 bg-amber-50 rounded-full px-3 py-1">45 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Spiced Fish Stew</h3>
+                    <p class="text-sm text-slate-600 mb-4">A warming, aromatic stew with fresh fish, tomatoes, and traditional East African spices. Perfect comfort food that showcases local flavors beautifully.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded">Medium</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 4</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+
+            <!-- Recipe 3 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-red-50 to-rose-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-rose-600"><circle cx="12" cy="12" r="9"/><path d="M7 12h10M12 7v10"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-rose-600 bg-rose-50 rounded-full px-3 py-1">60 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Baked Fish with Vegetables</h3>
+                    <p class="text-sm text-slate-600 mb-4">A wholesome baked dish with fresh fish, seasonal vegetables, and herbs. Healthy, delicious, and perfect for family dinners any night of the week.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded">Easy</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 3</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+
+            <!-- Recipe 4 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-violet-50 to-purple-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-purple-600"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-purple-600 bg-purple-50 rounded-full px-3 py-1">20 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Pan-Fried Fillets with Mango Salsa</h3>
+                    <p class="text-sm text-slate-600 mb-4">Crispy pan-fried fish fillets topped with a tropical mango salsa. A restaurant-quality dish that's surprisingly easy to prepare at home.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded">Easy</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 2</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-purple-200 text-purple-600 hover:bg-purple-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+
+            <!-- Recipe 5 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-cyan-50 to-blue-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-blue-600"><path d="M12 2l1.414 1.414L12 4.828l-1.414-1.414L12 2zM12 19.172l-1.414 1.414L12 22l1.414-1.414L12 19.172zm7.07-12.07l1.415-1.415L20 8.586l-1.415-1.414 1.485-1.485zm-14.14 0l1.414 1.414L4 8.586l-1.414-1.414L4.07 7.07z"/><circle cx="12" cy="12" r="9"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 rounded-full px-3 py-1">35 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Fish Soup (Pweza Bahari)</h3>
+                    <p class="text-sm text-slate-600 mb-4">A traditional coastal favorite - a nourishing soup made with fresh fish, spices, and local ingredients. Comfort in a bowl.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded">Medium</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 4</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-blue-200 text-blue-600 hover:bg-blue-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+
+            <!-- Recipe 6 -->
+            <article class="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-100 h-48 flex items-center justify-center">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-emerald-600"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg>
+                </div>
+                <div class="p-6">
+                    <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 rounded-full px-3 py-1">25 mins</span>
+                    <h3 class="font-display text-lg text-slate-900 mt-3 mb-2">Grilled Fish Skewers</h3>
+                    <p class="text-sm text-slate-600 mb-4">Fun, flavorful fish skewers perfect for BBQs and gatherings. Marinated fish and veggies grilled to perfection on a stick.</p>
+                    
+                    <div class="mb-4 pt-4 border-t border-slate-100">
+                        <p class="text-xs text-slate-500 font-semibold mb-2">Difficulty</p>
+                        <div class="flex gap-1">
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded">Easy</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Serves 4</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full py-2 rounded-lg border border-emerald-200 text-emerald-600 hover:bg-emerald-50 font-semibold transition-colors">
+                        View Recipe
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-8 mb-12">
+        <h2 class="font-display text-[26px] text-slate-900 mb-6">Cooking Tips</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="text-xl">🐟</span> Selecting Fresh Fish
+                </h3>
+                <p class="text-slate-600">Look for clear, bright eyes, firm flesh, and a fresh ocean smell. Our FastCart fish arrives fresh daily from Lake Victoria.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="text-xl">❄️</span> Storage Tips
+                </h3>
+                <p class="text-slate-600">Keep fish in the coldest part of your fridge (32-35°F) and use within 1-2 days. For longer storage, freeze immediately.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="text-xl">🔥</span> Cooking Temperature
+                </h3>
+                <p class="text-slate-600">Fish is done when it flakes easily with a fork and reaches 145°F internally. Don't overcook - it dries out quickly.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                    <span class="text-xl">🧂</span> Seasoning
+                </h3>
+                <p class="text-slate-600">Keep it simple - fresh fish needs minimal seasoning. Lemon, garlic, salt, and pepper bring out the natural flavors beautifully.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="rounded-2xl border border-slate-200 bg-gradient-to-r from-teal-50 to-cyan-50 p-8 text-center">
+        <h2 class="font-display text-[26px] text-slate-900 mb-2">Ready to Cook?</h2>
+        <p class="text-slate-600 mb-6">Order fresh Lake Victoria fish today and bring these recipes to life</p>
+        <a href="{% url 'store:index' %}" class="inline-flex h-11 items-center gap-2 rounded-xl bg-teal-600 px-6 text-sm font-semibold text-white hover:bg-teal-700">
+            Shop Fresh Fish
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+</div>
+{% endblock %}

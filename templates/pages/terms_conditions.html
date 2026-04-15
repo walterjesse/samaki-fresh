@@ -1,0 +1,58 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Terms & Conditions - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="prose prose-headings:text-slate-900 prose-headings:font-display prose-h1:text-3xl prose-h1:font-semibold prose-h2:text-2xl prose-h2:font-semibold prose-p:text-slate-600 prose-a:text-teal-600 max-w-none space-y-8">
+    <div class="text-center mb-12">
+        <h1 class="font-display text-[44px] sm:text-[56px] leading-tight bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">Terms & Conditions</h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">Last updated: {% now "F d, Y" %}</p>
+    </div>
+
+    <section>
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using FastCart, you agree to be bound by these Terms & Conditions. If you disagree with any part of these terms, you may not access our service.</p>
+    </section>
+
+    <section>
+        <h2>2. Orders and Payment</h2>
+        <p>All orders are subject to availability. We reserve the right to refuse or cancel any order for any reason at any time. Payment is required at the time of order placement via M-Pesa or Cash on Delivery.</p>
+    </section>
+
+    <section>
+        <h2>3. Pricing</h2>
+        <p>All prices are listed in Kenyan Shillings (KSh) and are subject to change without notice. We strive to provide accurate pricing but errors may occur. In case of pricing errors, we will contact you before processing your order.</p>
+    </section>
+
+    <section>
+        <h2>4. Delivery</h2>
+        <p>We aim to deliver within the specified timeframes but cannot guarantee exact delivery times. Delivery fees may apply based on your location. You must be available to receive your delivery or provide alternative arrangements.</p>
+    </section>
+
+    <section>
+        <h2>5. Returns and Refunds</h2>
+        <p>If you receive damaged or incorrect items, please contact us within 24 hours of delivery. We will arrange for replacement or refund at our discretion. Fresh fish items cannot be returned due to food safety regulations.</p>
+    </section>
+
+    <section>
+        <h2>6. User Accounts</h2>
+        <p>You are responsible for maintaining the confidentiality of your account credentials. You agree to notify us immediately of any unauthorized use of your account. We are not liable for any loss or damage from unauthorized account access.</p>
+    </section>
+
+    <section>
+        <h2>7. Intellectual Property</h2>
+        <p>All content on FastCart, including text, graphics, logos, and images, is our property or the property of our licensors and is protected by copyright laws.</p>
+    </section>
+
+    <section>
+        <h2>8. Limitation of Liability</h2>
+        <p>FastCart shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services. Our total liability shall not exceed the amount paid for the specific order in question.</p>
+    </section>
+
+    <section>
+        <h2>9. Contact Us</h2>
+        <p>For questions about these Terms & Conditions, please contact us at support@fastcart.com</p>
+    </section>
+</div>
+{% endblock %}

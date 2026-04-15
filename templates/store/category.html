@@ -1,0 +1,90 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Category Hero -->
+    <section class="text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700">
+            <span class="grid h-5 w-5 place-items-center rounded-full bg-teal-600 text-white">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>
+            </span>
+            {{ category.title }}
+        </div>
+        <h1 class="font-display mt-4 text-[32px] sm:text-[42px] text-slate-900">{{ category.title }}</h1>
+        <p class="mt-2 max-w-2xl mx-auto text-lg text-slate-600">{{ category.description|default:"Fresh selection from Lake Victoria" }}</p>
+        {% if products_list %}
+        <p class="mt-1 text-sm text-slate-500">{{ products_list|length }} products available</p>
+        {% endif %}
+    </section>
+
+    <!-- Products Grid -->
+    {% if products %}
+    <div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {% for product in products %}
+            <article class="group relative overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+                <div class="relative h-48 w-full overflow-hidden">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                    {% if product.product_type == "fresh" %}
+                    <span class="absolute left-3 top-3 rounded-full bg-emerald-500/90 px-2.5 py-1 text-[11px] font-semibold ring-1 backdrop-blur text-white ring-emerald-600/20">Fresh</span>
+                    {% endif %}
+                    <a href="{% url 'store:add_to_wishlist' %}?product_id={{ product.id }}" class="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-slate-400 shadow ring-1 ring-black/5 transition hover:bg-white hover:text-rose-500">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 21s-6.5-4.1-9-8.1C.5 9 3 5 7 5c2 0 3.5 1 5 2.5C13.5 6 15 5 17 5c4 0 6.5 4 4 7.9-2.5 4-9 8.1-9 8.1Z"/></svg>
+                    </a>
+                    <form method="POST" action="{% url 'store:add_to_cart' %}" class="absolute bottom-3 right-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="qty" value="1">
+                        <input type="hidden" name="cart_id" value="{{ request.session.cart_id|default:'guest' }}">
+                        <button type="submit" class="grid h-9 w-9 place-items-center rounded-full bg-white/95 text-slate-700 shadow ring-1 ring-black/5 transition hover:bg-white">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9H7.5L6 6Z"/><path d="M6 6 5 3H3"/></svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="min-w-0 flex-1">
+                            <h3 class="line-clamp-1 text-[15px] font-semibold text-slate-900 group-hover:text-teal-700">{{ product.name }}</h3>
+                            <p class="mt-1 text-[12px] text-slate-500">{{ product.category.title }}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-semibold text-slate-900">KSh {{ product.price|floatformat:0 }}</div>
+                            <div class="text-[11px] text-slate-500">per kg</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center justify-between">
+                        <div class="flex items-center gap-1 text-amber-400 text-sm">
+                            {% if product.average_rating %}
+                            {% with rating=product.average_rating|floatformat:0 %}
+                                {% for i in "12345"|make_list %}
+                                    {% if forloop.counter0 < rating %}
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 18.8 6.2 20.9l1.1-6.5L2.6 9.8l6.5-.9L12 3z"/></svg>
+                                    {% else %}
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 18.8 6.2 20.9l1.1-6.5L2.6 9.8l6.5-.9L12 3z"/></svg>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                            {% endif %}
+                            <span class="ml-1 text-[12px] text-slate-500">({{ product.reviews.all.count }})</span>
+                        </div>
+                        <a href="{% url 'store:product_detail' product.slug %}" class="text-xs font-medium text-teal-700 hover:underline whitespace-nowrap">View Details</a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <div class="text-slate-400 mb-2">
+                    <svg class="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900">No products found</h3>
+                <p class="mt-1 text-sm text-slate-600">Check back later for fresh fish in this category.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

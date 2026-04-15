@@ -1,0 +1,56 @@
+{% extends 'partials/base.html' %} {% load static %}
+
+{% block content %}
+<section>
+    <div class="mb-4 flex items-center justify-between">
+        <div>
+            <h1 class="font-display text-[26px] text-slate-900">My Products</h1>
+            <p class="text-sm text-slate-600">Add, edit, or hide products.</p>
+        </div>
+        <a href="{% url 'vendor:create_product' %}" class="h-10 rounded-xl bg-teal-600 px-4 text-sm font-semibold text-white hover:bg-teal-700">+ Add New Product</a>
+    </div>
+
+    <div class="overflow-hidden rounded-[24px] border border-slate-200 bg-white">
+        <div class="grid grid-cols-12 border-b border-slate-100 bg-slate-50/60 px-4 py-2.5 text-[12px] font-medium uppercase tracking-wider text-slate-500">
+            <div class="col-span-5">Bidhaa</div>
+            <div class="col-span-2">Price</div>
+            <div class="col-span-2">Stock</div>
+            <div class="col-span-2">Status</div>
+            <div class="col-span-1 text-right">Actions</div>
+        </div>
+        <div class="divide-y divide-slate-100">
+            {% for product in products %}
+            <div class="grid grid-cols-12 items-center px-4 py-3">
+                <div class="col-span-5 flex items-center gap-3">
+                    <img src="{{ product.image.url }}" alt="" loading="lazy" class="h-12 w-16 rounded-lg object-cover ring-1 ring-slate-200">
+                    <div class="min-w-0">
+                        <div class="truncate text-[14px] font-medium text-slate-900">{{ product.name }}</div>
+                        <div class="text-[12px] text-slate-500">{{ product.category.title }}</div>
+                    </div>
+                </div>
+                <div class="col-span-2 text-[14px] font-medium text-slate-900">KSh {{ product.price|floatformat:0 }}</div>
+                <div class="col-span-2">
+                    <div class="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-2.5 py-1 text-[12px] ring-1 ring-slate-200">
+                        <span class="h-1.5 w-1.5 rounded-full {% if product.stock > 20 %}bg-emerald-500{% elif product.stock > 5 %}bg-amber-500{% else %}bg-rose-500{% endif %}"></span>
+                        {{ product.stock }} kg
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <span class="inline-flex items-center rounded-full {% if product.status == 'published' %}bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200{% else %}bg-slate-50 text-slate-700 ring-1 ring-slate-200{% endif %} px-2 py-0.5 text-[11px] font-medium">
+                        {% if product.status == 'published' %}Active{% else %}Inactive{% endif %}
+                    </span>
+                </div>
+                <div class="col-span-1 flex justify-end gap-1.5">
+                    <a href="{% url 'vendor:update_product' product.id %}" class="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Edit">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                    </a>
+                    <a href="{% url 'vendor:delete_product' product.id %}" class="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Delete">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
